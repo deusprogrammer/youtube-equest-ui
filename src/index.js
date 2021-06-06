@@ -10,7 +10,7 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   if (error.response.status === 401 && error.response.data.error) {
-      window.location = "/util/yt/auth";
+      window.location = "https://deusprogrammer.com/util/yt/auth";
       return;
   }
   return Promise.reject(error);
