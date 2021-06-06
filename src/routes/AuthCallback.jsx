@@ -12,7 +12,7 @@ let AuthCallback = (props) => {
         let queryParam = new URLSearchParams(window.location.search);
 
         try {
-            let res = await axios.post(`${process.env.REACT_APP_YT_REQ_URL}/users`, {
+            let res = await axios.post(`https://deusprogrammer.com/api/yt/users`, {
                 code: queryParam.get("code")
             });
 
