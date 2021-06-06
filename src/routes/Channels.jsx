@@ -51,7 +51,7 @@ let Channels = (props) => {
                     return (
                         <tr>
                             <td>{channel.name}</td>
-                            <td><Link to={`${process.env.PUBLIC_URL}/channels/${channel._id}/admin`}><button>Request Admin</button></Link></td>
+                            <td><Link to={`${process.env.PUBLIC_URL}/channels/${channel._id}/admin`}><button>Request Queue</button></Link></td>
                             <td><Link to={`${process.env.PUBLIC_URL}/channels/${channel._id}/config`}><button>Channel Config</button></Link></td>
                             <td><Link to={`${process.env.PUBLIC_URL}/channels/${channel._id}/panel`}><button>Panel</button></Link></td>
                         </tr>

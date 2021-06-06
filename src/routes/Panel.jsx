@@ -8,14 +8,14 @@ class Panel extends React.Component {
     }
 
     updateRequestList = async () => {
-        let res = await axios.get(`${process.env.REACT_APP_YT_REQ_URL}/channels/${this.props.match.params.id}`, {
+        let res = await axios.get(`https://deusprogrammer.com/api/yt/channels/${this.props.match.params.id}`, {
             headers: {
                 Authorization: `Bearer ${window.localStorage.getItem("yt_req_jwt")}`
             }
         });
 
         let requestList = await Promise.all(res.data.requests.map(async (request) => {
-            let igdbRes = await axios.get(`${process.env.REACT_APP_YT_REQ_URL}/games/${request.igdbId}`);
+            let igdbRes = await axios.get(`https://deusprogrammer.com/api/yt/games/${request.igdbId}`);
             return (
                 {
                     id: igdbRes.data.id,
