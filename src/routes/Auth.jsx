@@ -1,8 +1,8 @@
 import React from 'react';
 
 
-const REDIRECT_URI = process.env.REACT_APP_YT_REDIRECT_URI;
-const YT_CLIENT_ID = process.env.REACT_APP_YT_CLIENT_ID;
+const REDIRECT_URI = "https://deusprogrammer.com/util/yt/auth/callback";
+const YT_CLIENT_ID = "1029155396357-8i82sjd0b284f252h0clsrcodm28u6nm.apps.googleusercontent.com";
 const SCOPES = "https://www.googleapis.com/auth/youtube email openid profile";
 const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/auth?approval_prompt=force&scope=${SCOPES}&client_id=${YT_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&access_type=offline`;
 
