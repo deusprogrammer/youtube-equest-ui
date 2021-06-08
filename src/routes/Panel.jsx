@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import { getRequests , getGame} from '../utils/ApiHelper';
 
 class Panel extends React.Component {
 	state = {
@@ -8,19 +8,15 @@ class Panel extends React.Component {
     }
 
     updateRequestList = async () => {
-        let res = await axios.get(`https://deusprogrammer.com/api/yt/channels/${this.props.match.params.id}`, {
-            headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("yt_req_jwt")}`
-            }
-        });
+        let channel = await getRequests(this.props.match.params.id);
 
-        let requestList = await Promise.all(res.data.requests.map(async (request) => {
-            let igdbRes = await axios.get(`https://deusprogrammer.com/api/yt/games/${request.igdbId}`);
+        let requestList = await Promise.all(channel.requests.map(async (request) => {
+            let game = await getGame(request.igdbId);
             return (
                 {
-                    id: igdbRes.data.id,
-                    game: igdbRes.data.name,
-                    cover: igdbRes.data.coverUrl,
+                    id: game.id,
+                    game: game.name,
+                    cover: game.coverUrl,
                     requestor: request.requestor
                 }
             )

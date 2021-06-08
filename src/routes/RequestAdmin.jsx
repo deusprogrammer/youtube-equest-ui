@@ -83,7 +83,7 @@ let RequestAdmin = (props) => {
                         id: game.id,
                         game: game.name,
                         cover: game.coverUrl,
-                        requestor: game.requestor
+                        requestor: request.requestor
                     }
                 )
             }));
@@ -97,11 +97,11 @@ let RequestAdmin = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className="container">
             <h1>Channel {name}</h1>
             <div>
                 { selectedGame ?
-                <div>
+                <div className="row">
                     <h3>Add Game to Queue</h3>
                     <div style={{display: "table", margin: "auto"}}>
                         <div style={{display: "table-cell", verticalAlign: "middle"}}>
@@ -111,19 +111,23 @@ let RequestAdmin = (props) => {
                             {selectedGame.game}
                         </div>
                         <div style={{display: "table-cell", verticalAlign: "middle"}}>
-                            <button onClick={() => {
-                                setSelectedGame(null);
+                            <button 
+                                className="btn btn-primary btn-lg"
+                                onClick={() => {
+                                    setSelectedGame(null);
                             }}>X</button>
                         </div>
                     </div>
                     <input 
                         type="text"
+                        className="form-control form-control-lg"
                         placeholder="Requestor"
                         value={requestor}
                         onChange={(e) => {
                             setRequestor(e.target.value);
                         }} /><br />
                     <button 
+                        className="btn btn-primary btn-lg"
                         onClick={() => {
                             let updatedRequests = [...requests, {
                                 id: selectedGame.id,
@@ -143,6 +147,7 @@ let RequestAdmin = (props) => {
                     <h3>Find Game</h3>
                     <input
                         type="text"
+                        className="form-control form-control-lg"
                         placeholder="Game"
                         value={searchTextPartial}
                         onChange={(e) => {
@@ -158,6 +163,7 @@ let RequestAdmin = (props) => {
                               }
                         }} />
                     <button 
+                        className="btn btn-primary btn-lg"
                         onClick={() => {
                             setSearchText(searchTextPartial);
                             searchGame(searchTextPartial);
@@ -168,7 +174,7 @@ let RequestAdmin = (props) => {
                             next={() => {
                                 searchGame(searchText, searchPage + 1)
                             }}
-                            height={400}
+                            style={{height: "100vh"}}
                             hasMore={searchMore}
                             loader={<h4>Loading...</h4>}
                             endMessage={
@@ -200,7 +206,8 @@ let RequestAdmin = (props) => {
                 </div>
                 }
             </div>
-            <div>
+            {!selectedGame && !searchText ?
+            <div className="row">
                 <h3>Request Queue</h3>
                 <table style={{margin: "auto"}}>
                     <tbody>
@@ -216,6 +223,8 @@ let RequestAdmin = (props) => {
                                     <td>requested by {request.requestor}</td>
                                     <td>
                                         <button 
+                                            className="btn btn-primary btn-lg"
+                                            style={{width: "100px"}}
                                             onClick={() => {
                                                 let updatedRequests = [...requests];
                                                 updatedRequests.splice(index, 1);
@@ -227,7 +236,7 @@ let RequestAdmin = (props) => {
                         })}
                     </tbody>
                 </table>
-            </div>
+            </div> : null}
         </div>
     )
 }

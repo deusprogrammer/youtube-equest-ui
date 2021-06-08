@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
-import axios from 'axios';
 import { useHistory } from 'react-router';
+import {authUser} from '../utils/ApiHelper';
 
 let AuthCallback = (props) => {
     let history = useHistory();
@@ -12,13 +11,11 @@ let AuthCallback = (props) => {
         let queryParam = new URLSearchParams(window.location.search);
 
         try {
-            let res = await axios.post(`https://deusprogrammer.com/api/yt/users`, {
-                code: queryParam.get("code")
-            });
+            let user = await authUser(queryParam.get("code"));
 
-            window.localStorage.setItem("yt_req_jwt", res.data.jwt);
+            window.localStorage.setItem("yt_req_jwt", user.jwt);
             setState("success");
-            setUser(res.data);
+            setUser(user);
             window.setTimeout(() => {
                 history.push(`${process.env.PUBLIC_URL}/channels`);
             }, 3000);

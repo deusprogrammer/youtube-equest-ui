@@ -1,4 +1,6 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import RequestAdmin from './routes/RequestAdmin';
@@ -9,8 +11,10 @@ import Channels from './routes/Channels';
 import ChannelAdmin from './routes/ChannelAdmin';
 
 import {ToastContainer} from 'react-toastify';
+import 'bootstrap';
 
-import 'react-toastify/dist/ReactToastify.css';
+window.YT_REQ_URL = process.env.REACT_APP_YT_REQ_URL != undefined ? process.env.REACT_APP_YT_REQ_URL : "https://deusprogrammer.com/api/yt";
+window.YT_CB_HOST = process.env.REACT_APP_YT_CB_HOST != undefined ? process.env.REACT_APP_YT_CB_HOST : "https://deusprogrammer.com";
 
 function App() {
     return (
