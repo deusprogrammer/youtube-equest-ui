@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRequests , getGame} from '../utils/ApiHelper';
+import { getRequestsPublic , getGame} from '../utils/ApiHelper';
 
 class Panel extends React.Component {
 	state = {
@@ -8,9 +8,9 @@ class Panel extends React.Component {
     }
 
     updateRequestList = async () => {
-        let channel = await getRequests(this.props.match.params.id);
+        let requests = await getRequestsPublic(this.props.match.params.id);
 
-        let requestList = await Promise.all(channel.requests.map(async (request) => {
+        let requestList = await Promise.all(requests.map(async (request) => {
             let game = await getGame(request.igdbId);
             return (
                 {

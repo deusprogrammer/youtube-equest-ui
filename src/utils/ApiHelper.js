@@ -36,12 +36,14 @@ export const authUser = async (code) => {
     return res.data;
 }
 
+export const getRequestsPublic = async (id) => {
+    let res = await axios.get(`${global.YT_REQ_URL}/public/channels/${id}/requests`);
+
+    return res.data;
+}
+
 export const getRequests = async (id) => {
-    let res = await axios.get(`${global.YT_REQ_URL}/channels/${id}`, {
-        headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("yt_req_jwt")}`
-        }
-    });
+    let res = await axios.get(`${global.YT_REQ_URL}/channels/${id}`, getOptions());
 
     return res.data;
 }
